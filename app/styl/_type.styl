@@ -1,0 +1,176 @@
+// ----------
+//    !!!
+
+// OPAL PARTY
+// http://opal-coast.rook-design.com/stylus/core/type.html
+
+//    !!!
+// ----------
+
+
+// ----------
+// Core typography
+
+$p          = 16
+$lh         = $p*1.6
+$gt         = $lh
+
+$pwidth     = 37
+
+
+// ----------
+// Modular scale
+
+$double-octave    = 4
+$major-twelfth    = 3
+$major-eleventh   = (8/3)
+$major-tenth      = (5/2)
+$octave           = 2
+$major-seventh    = (15/8)
+$minor-seventh    = (16/9)
+$major-sixth      = (5/3)
+$golden           = 1.618034
+$minor-sixth      = (8/5)
+$perfect-fifth    = (3/2)
+$augmented-fourth = math(2, 'sqrt')
+$perfect-fourth   = (4/3)
+$major-third      = (5/4)
+$minor-third      = (6/5)
+$major-second     = (9/8)
+$minor-second     = (16/15)
+
+$mod        = 1.3
+
+
+// ----------
+// Modular scale: relative
+
+ms($step, $scale = $mod)
+  $result = $scale
+
+  if $step > 1
+    $step = $step - 1
+
+    for $i in (1..$step)
+      $result = $result * $scale
+
+  else if $step < 0
+    $step = $step + 1
+
+    for $i in (1..$step)
+      $result = $result / $scale
+
+  else if $step == 0
+    $result = 1
+
+  return $result
+
+
+// ----------
+// Modular scale: Pixel value
+
+mp($step, $scale = $mod)
+  $result = $scale
+
+  if $step > 1
+    $step = $step - 1
+
+    for $i in (1..$step)
+      $result = $result * $scale
+
+  else if $step < 0
+    $step = $step + 1
+
+    for $i in (1..$step)
+      $result = $result / $scale
+
+  else if $step == 0
+    $result = 1
+
+  return $result * $p
+
+
+// ----------
+// Font-size & line-height
+
+fs($px)
+  // font-size: ($px/$p)*1em
+  font-size: ($px/$p)*1rem
+
+  $flh = $lh
+
+  if $flh/$px < 1
+    $flh = $lh*1.5
+
+  if $flh/$px < 1
+    $flh = $lh*2
+
+  if $flh/$px < 1
+    $flh = $lh*2.5
+
+  if $flh/$px < 1
+    $flh = $lh*3
+
+  if $flh/$px < 1
+    $flh = $lh*3.5
+
+  if $flh/$px < 1
+    $flh = $lh*4
+
+  if $flh/$px < 1
+    $flh = $lh*4.5
+
+  if $flh/$px < 1
+    $flh = $lh*5
+
+  if $flh/$px < 1
+    $flh = $lh*5.5
+
+  if $flh/$px < 1
+    $flh = $lh*6
+
+  if $flh/$px < 1
+    $flh = $lh*6.5
+
+  if $flh/$px < 1
+    $flh = $lh*7
+
+  if $flh/$px < 1
+    $flh = $lh*7.5
+
+  line-height: ($flh/$px)
+
+
+// ----------
+// Padding & Margin
+
+$let        = $lh/$p
+$gut        = $gt/$p
+
+mgn($mt,$mr,$mb = $mt,$ml = $mr)
+  if $mt == $mb and $mr == $ml
+    if $mr == auto
+      margin: $let*$mt*1rem auto
+
+    else
+      margin: $let*$mt*1rem $gut*$mr*1rem
+
+  else if $mt != $mb and $mr == $ml
+    if $mr == auto
+      margin: $let*$mt*1rem auto $let*$mb*1rem
+
+    else
+      margin: $let*$mt*1rem $gut*$mr*1rem $let*$mb*1rem
+
+  else
+    margin: $let*$mt*1rem $gut*$mr*1rem $let*$mb*1rem $gut*$ml*1rem
+
+pad($pt,$pr,$pb = $pt,$pl = $pr)
+  if $pb == $pt and $pr == $pl
+    padding: $let*$pt*1rem $gut*$pr*1rem
+
+  else if $pb != $pt and $pr == $pl
+    padding: $let*$pt*1rem $gut*$pr*1rem $let*$pb*1rem
+
+  else
+    padding: $let*$pt*1rem $gut*$pr*1rem $let*$pb*1rem $gut*$pl*1rem

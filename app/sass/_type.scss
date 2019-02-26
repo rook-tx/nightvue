@@ -1,0 +1,263 @@
+// ----------
+//    !!!
+
+// OPAL PARTY
+// http://opal-coast.rook-design.com/stylus/core/type.html
+
+//    !!!
+// ----------
+
+
+// ----------
+// Core typography
+
+// font-size for body copy <p> in px
+// - set as 1rem and all ratios are relative to this
+$p          : 16;
+
+// Line-height (vertical space) and gutter margin (horizontal space) of body copy <p>
+// - a multiple of $p or a manual px value e.g. $lh: 28;
+$lh         : $p*1.6;
+$gt         : $lh;
+
+// Maximum comfortable reading width of a column of body copy <p> in em
+// - desktop is set as max-width: 2 columns plus gutters, centered, in _col.scss
+// - tablet is set as max-width: 1 column plus gutters, centered
+// - mobile is 1 column
+$pwidth     : 37;
+
+
+// ----------
+// Modular scale
+
+// Text values for classical modular proportions
+// http://www.modularscale.com/?1&em&1.333
+
+$double-octave    : 4;
+$major-twelfth    : 3;
+$major-eleventh   : (8/3);
+$major-tenth      : (5/2);
+$octave           : 2;
+$major-seventh    : (15/8);
+$minor-seventh    : (16/9);
+$major-sixth      : (5/3);
+$golden           : 1.618034;
+$minor-sixth      : (8/5);
+$perfect-fifth    : (3/2);
+$augmented-fourth : math(2, 'sqrt');
+$perfect-fourth   : (4/3);
+$major-third      : (5/4);
+$minor-third      : (6/5);
+$major-second     : (9/8);
+$minor-second     : (16/15);
+
+// Select a text value from the list or manually input your own proportion e.g. $mod: 1.43 or $mod: (22/7);
+$mod        : $perfect-fifth;
+
+
+// ----------
+// Modular scale: relative
+
+// Returns the proportional ratio at given number of steps up or down the modular scale
+// e.g.
+// ms(4)  = 1*$mod*$mod*$mod*$mod
+// ms(-2) = 1/$mod/$mod
+// ms(0)  = 1
+@function ms($step, $scale: $mod) {
+  $result: $scale;
+
+  @if $step > 1 {
+    $step: $step - 1;
+
+    @for $i from 1 through $step {
+      $result: $result * $scale;
+    }
+  }
+
+  @else if $step < 0 {
+    $step: $step + 1;
+
+    @for $i from 1 through $step {
+      $result: $result / $scale;
+    }
+  }
+
+  @else if $step == 0 {
+    $result: 1
+  }
+
+  @return $result;
+}
+
+
+// ----------
+// Modular scale: Pixel value
+
+// Returns the px value of a proportionally scaled $p at the given number of steps up or down the modular scale
+// e.g.
+// mp(4)  = $p*$mod*$mod*$mod*$mod
+// mp(-2) = $p/$mod/$mod
+// mp(0)  = $p
+@function mp($step, $scale: $mod) {
+  $result: $scale;
+
+  @if $step > 1 {
+    $step: $step - 1;
+
+    @for $i from 1 through $step {
+      $result: $result * $scale;
+    }
+  }
+
+  @else if $step < 0 {
+    $step: $step + 1;
+
+    @for $i from 1 through $step {
+      $result: $result / $scale;
+    }
+  }
+
+  @else if $step == 0 {
+    $result: 1;
+  }
+
+  @return $result * $p;
+}
+
+
+// ----------
+// Font-size & line-height
+
+// Returns font-size in em and rem with line-height standardised to core line-height
+// - requires pixel value
+// e.g.
+// @include fs(42)    = responsive font-size + line-height for copy at 42px
+// @include fs(mp(2)) = responsive font-size + line-height for copy two steps up modular scale e.g. <h4>
+@mixin fs($px) {
+  font-size: ($px/$p)*1em;
+  font-size: ($px/$p)*1rem;
+
+  $flh: $lh;
+
+  @if $flh/$px < 1 {
+    $flh: $lh*1.5
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*2
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*2.5
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*3
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*3.5
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*4
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*4.5
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*5
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*5.5
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*6
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*6.5
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*7
+  }
+
+  @if $flh/$px < 1 {
+    $flh: $lh*7.5
+  }
+
+  line-height: ($flh/$px);
+}
+
+
+// ----------
+// Padding & Margin
+
+// Letting (vertical) and gutter (horizontal) as a multiple of $p
+$let        : $lh/$p;
+$gut        : $gt/$p;
+
+// Assume margins are an integer multiple of line-height or gutter margin of body copy <p>
+// - follows margin shorthand syntax
+// e.g.
+// @include mgn(1,1)      = 1 line-height of margin top and bottom, 1 gutter margin left and right
+// @include mgn(0,auto,1) = 0 top margin, margin-left and -right auto, 1 line-height on bottom
+// @include mgn(2,4,1,7)  = 2 line-heights on top, 4 gutters right, 1 line-height on bottom, 7 gutters left
+@mixin mgn($mt,$mr,$mb: $mt,$ml: $mr) {
+  @if $mt == $mb and $mr == $ml {
+    @if $mr == auto {
+      margin: $let*$mt*1em auto;
+      margin: $let*$mt*1rem auto;
+    }
+
+    @else {
+      margin: $let*$mt*1em $gut*$mr*1em;
+      margin: $let*$mt*1rem $gut*$mr*1rem;
+    }
+  }
+
+  @else if $mt != $mb and $mr == $ml {
+    @if $mr == auto {
+      margin: $let*$mt*1em auto $let*$mb*1em;
+      margin: $let*$mt*1rem auto $let*$mb*1em;
+    }
+
+    @else {
+      margin: $let*$mt*1em $gut*$mr*1em $let*$mb*1em;
+      margin: $let*$mt*1rem $gut*$mr*1rem $let*$mb*1rem;
+    }
+  }
+
+  @else {
+    margin: $let*$mt*1em $gut*$mr*1em $let*$mb*1em $gut*$ml*1em;
+    margin: $let*$mt*1rem $gut*$mr*1rem $let*$mb*1rem $gut*$ml*1rem;
+  }
+}
+
+// Assume paddings are an integer multiple of line-height and gutter margin of body copy <p>
+// - follows padding shorthand syntax
+// e.g.
+// @include pad(1,1)      = 1 line-height of padding top and bottom, 1 gutter padding left and right
+// @include pad(0,2,1)    = 0 top padding, 2 gutters padding-left and -right, 1 line-height on bottom
+// @include pad(3,2,4,5)  = 3 line-heights on top, 2 gutters right, 4 line-height on bottom, 5 gutters left
+@mixin pad($pt,$pr,$pb: $pt,$pl: $pr) {
+  @if $pb == $pt and $pr == $pl {
+    padding: $let*$pt*1em $gut*$pr*1em;
+    padding: $let*$pt*1rem $gut*$pr*1rem;
+  }
+
+  @else if $pb != $pt and $pr == $pl {
+    padding: $let*$pt*1em $gut*$pr*1em $let*$pb*1em;
+    padding: $let*$pt*1rem $gut*$pr*1rem $let*$pb*1rem;
+  }
+
+  @else {
+    padding: $let*$pt*1em $gut*$pr*1em $let*$pb*1em $gut*$pl*1em;
+    padding: $let*$pt*1rem $gut*$pr*1rem $let*$pb*1rem $gut*$pl*1rem;
+  }
+}

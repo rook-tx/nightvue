@@ -1,0 +1,53 @@
+{
+	"action": "https://yvwz0pz64f.execute-api.us-east-1.amazonaws.com/prod/nightvue/email",
+	"to": [
+		"ben@arrayofstars.com"
+	],
+	"from": "noreply@arrayofstars.com",
+	"site_name": "Party Starter",
+	"fail_message": "Please correct the following:",
+	"success_message": "The email was successfully sent",
+	"fields": {
+		"name": {
+			"question": "&mdash; Hi, my name is",
+			"type": "textField",
+			"placeholder": "Full Name", 
+			"required": true
+		},
+		"interest": {
+			"question": "I'm interested in a",
+			"type": "dropdown",
+			"options": [
+				"website", 
+				"mobile", 
+				"re-brand\/branding", 
+				"everything",
+				"something else"
+			],
+			"required": true
+		},
+		"budget": {
+			"question": "My budget is around", 
+			"type": "dropdown",
+			"options": [
+				"20-30k",
+				"30-50k",
+				"50-100k",
+				"100k+"
+			],
+			"required": true
+		},
+		"email": {
+			"question": "I can be reached by email at",
+			"type": "textField",
+			"placeholder": "name@website.com",
+			"required": true
+		},
+		"phone": {
+			"question": "and\/or called at",
+			"type": "textField",
+			"placeholder": "(555) 555-5555",
+			"required": false
+		}
+	}
+}

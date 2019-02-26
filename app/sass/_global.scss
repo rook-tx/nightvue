@@ -1,0 +1,26 @@
+// ----------
+// Global elements
+// ----------
+
+html, body, #app-wrapper {
+	height: 100%;
+	overflow: hidden;
+	overscroll-behavior: contain;
+}
+
+// ----------
+// Global elements
+// ----------
+
+.cf {
+	*zoom: 1;
+
+	&::before, &::after {
+		content: ' ';
+		display: block;
+	}
+
+	&::after {
+		clear: both;
+	}
+}

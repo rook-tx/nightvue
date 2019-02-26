@@ -1,0 +1,132 @@
+@import 'compass/reset';
+@import 'compass/css3';
+
+@import 'variables';
+// @import 'fonts';
+
+*, *::before, *::after {
+	@include box-sizing(border-box);
+	-webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+	background: $w;
+	color: $b;
+	font-family: system-ui, sans-serif;
+	min-height: 100%;
+}
+
+html {
+	font-size: ($p/16)*2vmin;
+}
+
+@include above($mobile) {
+	html {
+		font-size: ($p/16)*2vmin;
+	}
+}
+
+@include above($tablet) {
+	html {
+		font-size: ($p/16)*100%;
+	}
+}
+
+body {
+	font-size: 100%;
+	line-height: $let;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	height: auto;
+	max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, p {
+	@include mgn(1,0);
+	max-width: $pwidth*1em;
+}
+
+h1 {
+	@include fs(mp(5));
+}
+
+h2 {
+	@include fs(mp(4));
+}
+
+h3 {
+	@include fs(mp(3));
+}
+
+h4 {
+	@include fs(mp(2));
+}
+
+h5 {
+	@include fs(mp(1));
+}
+
+pre {
+	font-family: monospace;
+	@include fs(mp(0));
+}
+
+ul, ol {
+	@include mgn(1,0);
+	@include pad(0,0,0,1);
+
+	li {
+		@include mgn(.5,0);
+	}
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+form {
+	@include mgn(1,0);
+}
+
+.form-row {
+	@include mgn(.5,0);
+}
+
+button, input, label, select, textarea {
+	display: block;
+	font: inherit;
+	line-height: $let;
+	width: 100%;
+}
+
+button, input, select, textarea {
+	@include appearance( none );
+	background: none;
+	border: 1px solid #ccc;
+	outline: 0;
+
+	&:focus {
+		border-color: #555;
+	}
+}
+
+button, [type=submit] {
+	cursor: pointer;
+	@include mgn(0,auto);
+	@include pad(.25,1);
+	width: auto;
+}
+
+@import 'col';
+@import 'global';

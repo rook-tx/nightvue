@@ -1,0 +1,48 @@
+// ----------
+// Colours
+// ----------
+
+$b          = #000
+$w          = #fff
+
+$black			= #080b0b
+$teal				= #3e838b
+$red				= #d62413
+
+$prpl       = #b096da
+$blu        = #7ca3dc
+
+
+// ----------
+// Fonts
+// ----------
+
+$franklin		= 'FranklinGothic-Medium', sans-serif
+$work				= 'Work Sans', sans-serif
+
+$catamaran	= 'Catamaran', sans-serif
+$chivo			= 'Chivo', sans-serif
+$rubik			= 'Rubik Mono One', sans-serif
+
+$lato       	= 'Lato', sans-serif
+$merriweather = 'Merriweather', serif
+
+
+// ----------
+// Breakpoints
+// ----------
+
+$mobile     = 640px
+$tablet     = 864px
+$desktop    = 1200px
+
+above($size)
+	@media screen and (min-width: $size + 1)
+		{block}
+
+below($size)
+	@media screen and (max-width: $size)
+		{block}
+
+@import './_ease'
+@import './_type'

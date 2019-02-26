@@ -1,0 +1,13 @@
+$fonts: '';
+
+@each $font in $fonts {
+	@font-face {
+		font-family: '#{$font}';
+		src: url('../fonts/#{$font}.eot');
+		src: url('../fonts/#{$font}.eot?#iefix') format('embedded-opentype'),
+			url('../fonts/#{$font}.woff') format('woff'),
+			url('../fonts/#{$font}.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+	}
+}
